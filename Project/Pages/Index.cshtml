@@ -1,0 +1,97 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h4>List of contacts</h4>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>Email</th>
+                <th>Phone</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.People)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@(DateTime.Now.Year - item.BirthDay.Year)</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated) //Should only logged in users be able to modify table?
+{
+    <div>
+        <form method="post">
+            <label>
+                Delete user by ID
+                <input asp-for="NewPerson.Id" type="number" />
+            </label>
+            <button type="submit" class="btn alert-danger">DELETE</button>
+
+        </form>
+    </div>
+    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-outline-primary">Add New Contact!</button>
+}
+
+<div id="id01" class="modal">
+
+    <form method="post" class="modal-content animate">
+
+        <div class="container">
+            <input type="text" asp-for="NewPerson.FirstName" placeholder="Name"  required/> Name
+            <br />
+            <input type="text" asp-for="NewPerson.LastName" placeholder="LastName" required/> Last Name
+            <br />
+            <input type="text" asp-for="NewPerson.Email" placeholder="Email" required/> Email
+            <br />
+            <input type="number" asp-for="NewPerson.Phone" placeholder="Phone" required min="9"/> Phone Number
+            <br />
+            <input type="date" asp-for="NewPerson.BirthDay" placeholder="Birthday" /> Birth Day
+            <br />
+
+            <select name="kategoria" asp-for="NewPerson.Category">
+                <option value="2">Prywatny</option>
+                <option value="1">Służbowy</option>
+                <option value="3">Inny</option>
+            </select>
+
+            <br />
+            <button class="btn btn-primary mt-1" type="submit">Add new contact!</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
