@@ -24,4 +24,4 @@ EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
  Cleaned and Fixed code :)
 
 Biblioteki: 
-*Pomelo.EntityFrameworkCore.MySql: MySql Migration
+* Pomelo.EntityFrameworkCore.MySql: MySql Migration
