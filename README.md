@@ -21,7 +21,7 @@ MySql.Data: Obsługa bazy MySQL
 EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
 
  # Rework Branch is available!
- Cleaned and Fixed code :)
+ - [x] Cleaned and Fixed code
 
 Biblioteki: 
 * Pomelo.EntityFrameworkCore.MySql: MySql Migration
