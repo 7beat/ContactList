@@ -8,7 +8,7 @@ Person - Klasa bazowa, której pola pokrywają się z kolumnami klientów z bazy
 
 Metody:
 
-public IActionResult OnPost(): Metoda, która wywoływana jest za każdym razem gdy <button type="submit"> zostaje wciśnięty a dane z formularza wypełniają "pusty" obiekt NewPerson. Tutaj zostaje podjęta decyzja czy obiekt ma zostać dodany do bazy danych czy też z niej usunięty 
+public IActionResult OnPost(): Metoda, która wywoływana jest za każdym razem gdy przycisk "submit" zostaje wciśnięty a dane z formularza wypełniają "pusty" obiekt NewPerson. Tutaj zostaje podjęta decyzja czy obiekt ma zostać dodany do bazy danych czy też z niej usunięty 
 zwraca:  RedirectToPage("Index") w celu odświeżenia strony
 
 private void ConnectDB(): Metoda, która łączy się z lokalną bazą danych przy każdym przeładowaniu strony w celu pobrania najważniejszych informacji. Automatycznie dodaje odebrane wyniki do listy, która jest użyta do wyświetlenia informacji na głównej stronie.
