@@ -25,7 +25,7 @@
     </thead>
 
     <tbody>
-        @foreach (var item in Model.People)
+        @foreach (var item in Model.Contacts)
         {
             <tr>
                 <td>@item.Id</td>
@@ -48,7 +48,7 @@
         <form method="post">
             <label>
                 Delete user by ID
-                <input asp-for="NewPerson.Id" type="number" />
+                <input asp-for="Contact.Id" type="number" />
             </label>
             <button type="submit" class="btn alert-danger">DELETE</button>
 
@@ -62,22 +62,23 @@
     <form method="post" class="modal-content animate">
 
         <div class="container">
-            <input type="text" asp-for="NewPerson.FirstName" placeholder="Name"  required/> Name
-            <br />
-            <input type="text" asp-for="NewPerson.LastName" placeholder="LastName" required/> Last Name
-            <br />
-            <input type="text" asp-for="NewPerson.Email" placeholder="Email" required/> Email
-            <br />
-            <input type="number" asp-for="NewPerson.Phone" placeholder="Phone" required min="9"/> Phone Number
-            <br />
-            <input type="date" asp-for="NewPerson.BirthDay" placeholder="Birthday" /> Birth Day
-            <br />
 
-            <select name="kategoria" asp-for="NewPerson.Category">
+            <input type="text" asp-for="Contact.FirstName" placeholder="Name" required /> Name
+            <br />
+            <input type="text" asp-for="Contact.LastName" placeholder="LastName" required /> Last Name
+            <br />
+            <input type="text" asp-for="Contact.Email" placeholder="Email" required /> Email
+            <br />
+            <input type="number" asp-for="Contact.Phone" placeholder="Phone" required min="9" /> Phone Number
+            <br />
+            <input type="date" asp-for="Contact.BirthDay" placeholder="Birthday" /> Birth Day
+            <br /> <!--REMEMBER ABOUT DATE FORMATING-->
+
+@*            <select name="kategoria" asp-for="NewPerson.Category">
                 <option value="2">Prywatny</option>
                 <option value="1">Służbowy</option>
                 <option value="3">Inny</option>
-            </select>
+            </select>*@
 
             <br />
             <button class="btn btn-primary mt-1" type="submit">Add new contact!</button>

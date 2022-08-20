@@ -13,39 +13,75 @@ namespace Project.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ApplicationDbContext _context;
+        //Będzie działać podobnie!
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
         {
             _logger = logger;
             //Logging service
+            _context = context;
+            //DbContext
         }
 
         [BindProperty]
         public Person NewPerson { get; set; }
+
+        [BindProperty]//NewContact?
+        public Contact Contact { get; set; }
         //Person template used to create objects
 
         public List<Person> People = new();
+        public List<Contact> Contacts = new();
+
+        public string data;
 
         public void OnGet()
         {
-            ConnectDB();
+            Contacts = _context.Contacts.ToList();
+
+            //foreach (var item in Contacts)
+            //{
+            //    Console.WriteLine($"Contacts: {item.FirstName}");
+            //}
             //Refresh Data EveryTime
         }
 
 
         public IActionResult OnPost()
         {
-            
+            Console.WriteLine(Contact.FirstName); 
+            Console.WriteLine(Contact.LastName);
+            Console.WriteLine(Contact.Email);
+            Console.WriteLine($"Contact's BirthDay: {Contact.BirthDay}");
+            //LOG: Contact's BirthDay: 01.01.0001, po wybraniu daty z formy
+            //Contact został uzupełniony z formy!
+
+            //Contact's id is specified from form!
             if (NewPerson.Id == 0) //If 0 means it was sent from creation form else it was specified to delete
             {
-                AddNewPersonDB(new() { FirstName = NewPerson.FirstName, LastName = NewPerson.LastName, Email = NewPerson.Email, Phone = NewPerson.Phone, BirthDay = NewPerson.BirthDay, Category = NewPerson.Category });
+                //AddContactDB(Contact);
+                //AddNewPersonDB(new() { FirstName = NewPerson.FirstName, LastName = NewPerson.LastName, Email = NewPerson.Email, Phone = NewPerson.Phone, BirthDay = NewPerson.BirthDay, Category = NewPerson.Category });
+
             }
             else
             {
-                DeletePersonDB(NewPerson.Id);
+                //DeletePersonDB(NewPerson.Id);
+                //DeleteContactDB();
+
             }
 
             return RedirectToPage("Index");
+            //Refresh
+        }
+
+        private void AddContactDB(Contact newContact)
+        {
+            //try? date format. ToDo: Fix date!
+            //_context.Add(contact);
+            _context.Contacts.Add(newContact);
+            _context.SaveChanges();
+            //Musi być w try bo jeśli wartośc unique się powtarza to exception!
+            //SaveChanges() to insert it!
         }
 
         private void AddNewPersonDB(Person person) 
@@ -54,7 +90,10 @@ namespace Project.Pages
 
             var query = $@"INSERT INTO `users` (`id`, `email`, `password`, `name`, `surname`, `phone`, `birthday`, `category`) VALUES (NULL, '{person.Email}', 'user', '{person.FirstName}', '{person.LastName}', '{person.Phone}', '{person.BirthDay.ToString("O")}', '{person.Category}')";
 
-            MySqlConnection conn = new MySqlConnection(conString); 
+            MySqlConnection conn = new MySqlConnection(conString);
+
+            //Musi dostać obiekt typu contact
+            //_context.Add<Contact>();
 
             try
             {
