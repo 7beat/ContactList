@@ -1,5 +1,4 @@
 # Recruitment-Task
-# Rework Branch is available!
 Streszczenie:
 Aplikacja zakłada używanie bazy MySQL w celu przechowywania informacji na temat poszczególnych kontaktów oraz MSSQL dla danych logowania użytkowników. 
 W celu włączenia funkcjonalności logowania należy przeprowadzić migrację w konsoli menedżera pakietów: PM> update-database
@@ -21,5 +20,8 @@ Biblioteki:
 MySql.Data: Obsługa bazy MySQL
 EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
 
+ # Rework Branch is available!
+ Cleaned and Fixed code :)
 
-
+Biblioteki: 
+*Pomelo.EntityFrameworkCore.MySql: MySql Migration
