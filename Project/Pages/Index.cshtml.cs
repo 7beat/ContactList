@@ -5,12 +5,14 @@ using MySql.Data.MySqlClient;
 using Project.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Data;
+using Project.Data;
 
 namespace Project.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
