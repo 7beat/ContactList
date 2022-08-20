@@ -23,6 +23,7 @@ EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
  # Rework Branch is available!
  - [x] Cleaned and Fixed code
  - [x] User Accounts moved to MySql
+ - [x] Secured Connection string
 
 Biblioteki: 
 * Pomelo.EntityFrameworkCore.MySql: MySql Migration
