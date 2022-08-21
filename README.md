@@ -1,12 +1,13 @@
 # Recruitment-Task
-Streszczenie:
-Aplikacja zakłada używanie bazy MySQL w celu przechowywania informacji na temat poszczególnych kontaktów oraz MSSQL dla danych logowania użytkowników. 
-W celu włączenia funkcjonalności logowania należy przeprowadzić migrację w konsoli menedżera pakietów: PM> update-database
+## Summary
+Aplikacja zakłada używanie bazy MySQL w celu przechowywania informacji na temat poszczególnych kontaktów oraz danych logowania użytkowników.
 
-Klasy:
-Person - Klasa bazowa, której pola pokrywają się z kolumnami klientów z bazy danych. Klasa ta została użyta w celu tworzenia obiektów kontaków, których dane pochodzą z serwera. 
+*W celu włączenia funkcjonalności logowania należy przeprowadzić migrację w konsoli menedżera pakietów: 1)PM>add-migration 2)PM> update-database*
 
-Metody:
+## Klasy:
+Contact - Klasa bazowa, której pola pokrywają się z kolumnami klientów z bazy danych. Klasa ta została użyta w celu tworzenia obiektów kontaków, których dane pochodzą z serwera. 
+
+## Metody:
 
 public IActionResult OnPost(): Metoda, która wywoływana jest za każdym razem gdy przycisk "submit" zostaje wciśnięty a dane z formularza wypełniają "pusty" obiekt NewPerson. Tutaj zostaje podjęta decyzja czy obiekt ma zostać dodany do bazy danych czy też z niej usunięty 
 zwraca:  RedirectToPage("Index") w celu odświeżenia strony
@@ -17,6 +18,7 @@ private void AddNewPersonDB(Person person): Metoda ta pozwala dodać nowy obiekt
 private void DeletePersonDB(NewPerson.Id): Metoda ta zostaje wywołana w OnPost. Jeśli użytkownik sprecyzował Id obiektu w formularzu do usunięcia, wtedy zostaje podjęta decyzja o wywołaniu tej metody. Przekazywane jest tylko id w celu sprecyzowania "query" do bazy danych.
 
 Biblioteki:
+* Pomelo.EntityFrameworkCore.MySql: MySql Migration
 MySql.Data: Obsługa bazy MySQL
 EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
 
@@ -25,6 +27,8 @@ EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
  - [x] User Accounts moved to MySql
  - [x] Secured Connection string
  - [x] Data Validation
+ 
+ ** Rework Branch has been merged! **
 
 Biblioteki: 
 * Pomelo.EntityFrameworkCore.MySql: MySql Migration
