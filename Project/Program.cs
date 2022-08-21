@@ -8,22 +8,18 @@ ILogger _logger = builder.Services.BuildServiceProvider().GetRequiredService<ILo
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString)); //Old sql system
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     try
     {
         options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
     catch (Exception e)
     {
-
         _logger.LogError(e, e.Message);
-        //_logger.LogError(e, $"{e.Message}\n InnerException: {e.InnerException.Message}"); //Inner threw exception!
     }
 });
 
