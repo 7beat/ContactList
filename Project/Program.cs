@@ -4,7 +4,7 @@ using Project.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+ILogger _logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -14,7 +14,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    try
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
+    catch (Exception e)
+    {
+
+        _logger.LogError(e, e.Message);
+        //_logger.LogError(e, $"{e.Message}\n InnerException: {e.InnerException.Message}"); //Inner threw exception!
+    }
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
