@@ -28,7 +28,7 @@ EntityFrameworkCore: Migracja i utworzenie w MSSQL tabeli użytkowników
  - [x] Secured Connection string
  - [x] Data Validation
  
- ** Rework Branch has been merged! **
+ **Rework Branch has been merged!**
 
 Biblioteki: 
 * Pomelo.EntityFrameworkCore.MySql: MySql Migration
