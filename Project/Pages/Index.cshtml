@@ -62,21 +62,19 @@
 
         </form>
     </div>
-    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-outline-primary">Add New Contact!</button>
+    <button onclick="document.getElementById('addForm').style.display='block'" class="btn btn-outline-primary">Add New Contact!</button>
 }
 
-<div id="id01" class="modal">
+<div id="addForm" class="modal">
 
     <form method="post" class="modal-content animate">
-        <!-- onsubmit="return validateForm()" -->
-
         <div class="container">
-
-            <input type="text" minlength="3" maxlength="15" asp-for="Contact.FirstName" placeholder="Name" required /> Name
+                                                                                                                            <!--@@ to escape dotnet pattern-->
+            <input type="text" minlength="3" maxlength="15" asp-for="Contact.FirstName" placeholder="Name" pattern="[^'\x22<>()!@@#$%^&*()]+" required /> Name
             <br />
-            <input type="text" minlength="3" maxlength="20" asp-for="Contact.LastName" placeholder="LastName" required /> Last Name
-            <br />
-            <input type="email" maxlength="30" asp-for="Contact.Email" placeholder="Email" required /> Email
+            <input type="text" minlength="3" maxlength="20" asp-for="Contact.LastName" placeholder="LastName" pattern="[^'\x22<>()!@@#$%^&*()]+" required /> Last Name
+            <br />                                                                                                      
+            <input type="email" maxlength="30" asp-for="Contact.Email" placeholder="Email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" required /> Email
             <br />
             <input type="number" minlength="3" maxlength="11" asp-for="Contact.Phone" placeholder="Phone" required /> Phone Number
             <br />
@@ -94,9 +92,6 @@
     </form>
 </div>
 
-<button onclick="myFunction()">Try it</button>
-<!--Calling method on click!-->
-
 <script>
     function myFunction() {
         alert("I am an alert box!");
@@ -104,7 +99,7 @@
 </script>
 
 <script>
-    var modal = document.getElementById('id01');
+    var modal = document.getElementById('addForm');
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
@@ -114,13 +109,3 @@
     }
 </script>
 
-<!--Validating form-->
-<script>
-    function validateForm() { //Name of form & input
-        let x = document.forms["myForm"]["fname"].value;
-        if (x == "") {
-            alert("Name must be filled out");
-            return false;
-        }
-    }
-</script>
