@@ -24,22 +24,16 @@ namespace Project.Pages
 
         [BindProperty]
         public Contact Contact { get; set; }
-        //Template used to create objects
+        //Template used to create objects from DB
 
         public List<Person> People = new();
         public List<Contact> Contacts = new();
-
-        //public List<Contact> Contacts2; //null testing
-
-        public string data;
 
         public void OnGet()
         {
             try
             {
-                Contacts = _context.Contacts.ToList();//Count == 0(czyli nie jest nullem tylko ma 0 tabel), here init? else null?
-                //Contacts2 = new(_context.Contacts.ToList()); //to jest teraz nullem! Jak działa to nie jest nullem! Site throws exception, DbContext not working!
-                //Contacts = new(_context.Contacts.ToList());
+                Contacts = _context.Contacts.ToList();
             }
             catch (Exception e)
             {
@@ -49,11 +43,7 @@ namespace Project.Pages
 
         public IActionResult OnPost()
         {
-            Console.WriteLine(Contact.FirstName);
-            Console.WriteLine(Contact.LastName);
-            Console.WriteLine(Contact.Email);
-            Console.WriteLine($"Contact's BirthDay: {Contact.BirthDay}");
-            //LOG: Contact's BirthDay: 01.01.0001, po wybraniu daty z formy
+            //LOG: Contact's BirthDay: 01.01.0001, after post
             //ToDo: Fix Birth date!
 
             if (Contact.Id == 0) //If 0 means it was sent from creation form else it was specified to delete
@@ -69,7 +59,7 @@ namespace Project.Pages
             //Refresh
         }
 
-        private void AddContactDB(Contact newContact) //Works!
+        private void AddContactDB(Contact newContact)
         {
             //ToDo: Fix Date!
             try
@@ -79,7 +69,6 @@ namespace Project.Pages
             }
             catch (Exception e)
             {
-                //ToDo: PopUP
                 _logger.LogError(e, e.InnerException.Message);
             }
         }
