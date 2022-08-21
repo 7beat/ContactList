@@ -10,6 +10,14 @@
 </div>
 
 <table class="table table-bordered">
+
+    @if (Model.Contacts.Count == 0)
+    {
+        <div class="text-center alert-danger">
+            <h1>Couldnt read data from DataBase!</h1>
+        </div>
+    }
+
     <thead>
         <tr>
             <th>Id</th>
@@ -60,24 +68,24 @@
 <div id="id01" class="modal">
 
     <form method="post" class="modal-content animate">
+        <!-- onsubmit="return validateForm()" -->
 
         <div class="container">
 
-            <input type="text" asp-for="Contact.FirstName" placeholder="Name" required /> Name
+            <input type="text" minlength="3" maxlength="15" asp-for="Contact.FirstName" placeholder="Name" required /> Name
             <br />
-            <input type="text" asp-for="Contact.LastName" placeholder="LastName" required /> Last Name
+            <input type="text" minlength="3" maxlength="20" asp-for="Contact.LastName" placeholder="LastName" required /> Last Name
             <br />
-            <input type="text" asp-for="Contact.Email" placeholder="Email" required /> Email
+            <input type="email" maxlength="30" asp-for="Contact.Email" placeholder="Email" required /> Email
             <br />
-            <input type="number" asp-for="Contact.Phone" placeholder="Phone" required min="9" /> Phone Number
+            <input type="number" minlength="3" maxlength="11" asp-for="Contact.Phone" placeholder="Phone" required /> Phone Number
             <br />
-            <input type="date" asp-for="Contact.BirthDay" placeholder="Birthday" /> Birth Day
+            <input type="date" asp-for="Contact.BirthDay" placeholder="Birthday" required /> Birth Day
             <br /> <!--REMEMBER ABOUT DATE FORMATING-->
-
-@*            <select name="kategoria" asp-for="NewPerson.Category">
-                <option value="2">Prywatny</option>
-                <option value="1">Służbowy</option>
-                <option value="3">Inny</option>
+            @*            <select name="kategoria" asp-for="NewPerson.Category">
+            <option value="2">Prywatny</option>
+            <option value="1">Służbowy</option>
+            <option value="3">Inny</option>
             </select>*@
 
             <br />
@@ -85,6 +93,15 @@
         </div>
     </form>
 </div>
+
+<button onclick="myFunction()">Try it</button>
+<!--Calling method on click!-->
+
+<script>
+    function myFunction() {
+        alert("I am an alert box!");
+    }
+</script>
 
 <script>
     var modal = document.getElementById('id01');
@@ -97,8 +114,13 @@
     }
 </script>
 
-<script type="text/javascript" language="javascript">
-    function Func() {
-        alert("hello!") //Couldnt read data from DB
+<!--Validating form-->
+<script>
+    function validateForm() { //Name of form & input
+        let x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        }
     }
 </script>
