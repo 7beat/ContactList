@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime BirthDay { get; set; }
-
+        public string Date { get; set; }
         public int Category { get; set; }
 
     }
