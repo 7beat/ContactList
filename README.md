@@ -2,7 +2,9 @@
 ## Summary
 Aplikacja zakłada używanie bazy MySQL w celu przechowywania informacji na temat poszczególnych kontaktów oraz danych logowania użytkowników.
 
-*W celu włączenia funkcjonalności logowania należy przeprowadzić migrację w konsoli menedżera pakietów: 1)PM>add-migration 2)PM> update-database*
+*W celu włączenia funkcjonalności logowania należy przeprowadzić migrację w konsoli menedżera pakietów: 
+1. PM>add-migration 
+2. PM> update-database*
 
 ## Klasy:
 Contact - Klasa bazowa, której pola pokrywają się z kolumnami klientów z bazy danych. Klasa ta została użyta w celu tworzenia obiektów kontaków, których dane pochodzą z serwera. 
