@@ -1,4 +1,4 @@
-# Recruitment-Task
+# Contact List
 
 ## Summary
 Aplikacja zakłada używanie bazy MySql w celu przechowywania informacji na temat poszczególnych kontaktów oraz danych logowania użytkowników. Główna strona wyświetla wszystkie rekordy pobrane z serwera, a w przypadku niepowodzenia będzie o tym informowała!
