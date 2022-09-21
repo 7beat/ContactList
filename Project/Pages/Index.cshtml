@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}/{id?}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -11,10 +11,10 @@
 
 <table class="table table-bordered">
 
-    @if (Model.Contacts.Count == 0)
+    @if (Model.ContactList.Count == 0)
     {
         <div class="text-center alert-danger">
-            <h1>Couldnt read data from DataBase!</h1>
+            <h1>Could not read data from DataBase!</h1>
         </div>
     }
 
@@ -33,7 +33,7 @@
     </thead>
 
     <tbody>
-        @foreach (var item in Model.Contacts)
+        @foreach (var item in Model.ContactList)
         {
             <tr>
                 <td>@item.Id</td>
@@ -44,6 +44,13 @@
                 {
                     <td>@item.Email</td>
                     <td>@item.Phone</td>
+                    <td class="text-center">
+                        <form asp-page-handler="delete" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            @*<a href="youtube.pl">Nigger</a> Teraz są obok siebie!*@
+                        </form>
+                        
+                    </td>
                 }
             </tr>
         }
@@ -85,12 +92,21 @@
             <option value="1">Służbowy</option>
             <option value="3">Inny</option>
             </select>*@
-
+            
             <br />
             <button class="btn btn-primary mt-1" type="submit">Add new contact!</button>
         </div>
     </form>
 </div>
+
+@*TESTING CUSTOM POST METHOD, .NET comments arent visible in website source!*@
+<form method="post" asp-page-handler="Test">
+    <button type="submit" formmethod="post">OnPostVoid</button>
+</form>
+
+<form method="post" asp-page-handler="Test2">
+    <button type="submit" formmethod="post">OnPostIActionResult</button>
+</form>
 
 <script>
     function myFunction() {
