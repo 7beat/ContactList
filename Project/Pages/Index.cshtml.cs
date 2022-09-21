@@ -6,6 +6,7 @@ using Project.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Data;
 using Project.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project.Pages
 {
@@ -29,18 +30,22 @@ namespace Project.Pages
         public List<Person> People = new();
         public List<Contact> Contacts = new();
 
-        public void OnGet()
+        public IList<Contact> ContactList { get; set; } = default!;
+
+        //Working, printed records, just need to change to display ContactList instead of Contacts!
+        public async Task OnGetAsync()
         {
-            try
+            if (_context.Contacts != null)
             {
-                Contacts = _context.Contacts.ToList();
+                ContactList = await _context.Contacts.ToListAsync();
             }
-            catch (Exception e)
+
+            foreach (var item in ContactList)
             {
-                _logger.LogCritical(e, e.Message);
+                Console.WriteLine(item.FirstName);
             }
         }
-
+        
         public IActionResult OnPost()
         {
             //LOG: Contact's BirthDay: 01.01.0001, after post
@@ -56,7 +61,39 @@ namespace Project.Pages
             }
 
             return RedirectToPage("Index");
+            //return redirectto
             //Refresh
+        }
+
+
+
+        public async Task<IActionResult> OnPostDelete(int? id)
+        {
+            if (id == null || _context.Contacts == null)
+            {
+                return NotFound();
+            }
+
+            var contact = await _context.Contacts.FindAsync(id);
+
+            if (contact is not null)
+            {
+                Contact = contact;
+                _context.Contacts.Remove(Contact);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("Index");
+        }
+
+        //public async Task<IActionResult> OnPostEdit(int? id){}
+
+        public IActionResult OnPostTest2()
+        {
+            Console.WriteLine("!!!!!!!!!!!!!POST IACTIONRESULT!!!!!!!!!!!!!!!!!");
+            return RedirectToPage("Index");
+            //Najpierw wywołał się handler potem przeniusł na Index!
+            //Working! Custom OnPost which refreshes page!
         }
 
         private void AddContactDB(Contact newContact)
