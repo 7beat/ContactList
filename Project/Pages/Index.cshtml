@@ -47,7 +47,7 @@
                     <td class="text-center">
                         <form asp-page-handler="delete" asp-route-id="@item.Id" method="post">
                             <button type="submit" class="btn btn-danger">Delete</button>
-                            @*<a href="youtube.pl">Nigger</a> Teraz są obok siebie!*@
+                            @*<a href="youtube.pl">Link</a> Teraz są obok siebie!*@
                         </form>
                         
                     </td>
@@ -75,17 +75,17 @@
 <div id="addForm" class="modal">
 
     <form method="post" class="modal-content animate">
-        <div class="container">
+        <div class="container text-center">
                                                                                                                             <!--@@ to escape dotnet pattern-->
-            <input type="text" minlength="3" maxlength="15" asp-for="Contact.FirstName" placeholder="Name" pattern="[^'\x22<>()!@@#$%^&*()]+" required /> Name
+            <input class="text-center" type="text" minlength="3" maxlength="15" asp-for="Contact.FirstName" placeholder="Name" pattern="[^'\x22<>()!@@#$%^&*()]+" required /> @*Without it its centered*@
             <br />
-            <input type="text" minlength="3" maxlength="20" asp-for="Contact.LastName" placeholder="LastName" pattern="[^'\x22<>()!@@#$%^&*()]+" required /> Last Name
+            <input class="text-center" type="text" minlength="3" maxlength="20" asp-for="Contact.LastName" placeholder="LastName" pattern="[^'\x22<>()!@@#$%^&*()]+" required />
             <br />                                                                                                      
             <input type="email" maxlength="30" asp-for="Contact.Email" placeholder="Email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" required /> Email
             <br />
             <input type="number" minlength="3" maxlength="11" asp-for="Contact.Phone" placeholder="Phone" required /> Phone Number
             <br />
-            <input type="date" asp-for="Contact.BirthDay" placeholder="Birthday" required /> Birth Day
+            <input type="date" asp-for="Contact.BirthDay" asp-format="{0:yyyy-MM-ddTHH:mm}" required />
             <br /> <!--REMEMBER ABOUT DATE FORMATING-->
             @*            <select name="kategoria" asp-for="NewPerson.Category">
             <option value="2">Prywatny</option>
@@ -98,15 +98,6 @@
         </div>
     </form>
 </div>
-
-@*TESTING CUSTOM POST METHOD, .NET comments arent visible in website source!*@
-<form method="post" asp-page-handler="Test">
-    <button type="submit" formmethod="post">OnPostVoid</button>
-</form>
-
-<form method="post" asp-page-handler="Test2">
-    <button type="submit" formmethod="post">OnPostIActionResult</button>
-</form>
 
 <script>
     function myFunction() {
