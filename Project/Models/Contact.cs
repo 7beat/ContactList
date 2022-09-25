@@ -26,7 +26,7 @@ namespace Project.Models
 
         [Required(ErrorMessage = "BirthDay is required!")]
         [DataType(DataType.Date)] //Specifying it as Date
-        public DateOnly BirthDay { get; set; }
+        public DateTime BirthDay { get; set; }
 
         //public enum Category
         //{
