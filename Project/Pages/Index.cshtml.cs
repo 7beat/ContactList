@@ -27,6 +27,17 @@ namespace Project.Pages
         public Contact Contact { get; set; }
         //Template used to create objects from DB
 
+        [BindProperty(SupportsGet = true)]
+        public DateTime Date { get; set; }
+        //DateTime works properly! but callendar starts at year 0 xD
+
+        //[BindProperty(SupportsGet = true)]
+        //public DateOnly Dateonly { get; set; } = default!;
+        //Somehow threw exception
+
+        [BindProperty(SupportsGet = true)]
+        public string DateString { get; set; }
+
         public List<Person> People = new();
         public List<Contact> Contacts = new();
 
@@ -48,12 +59,12 @@ namespace Project.Pages
         
         public IActionResult OnPost()
         {
-            //LOG: Contact's BirthDay: 01.01.0001, after post
-            //ToDo: Fix Birth date!
-
             if (Contact.Id == 0) //If 0 means it was sent from creation form else it was specified to delete
             {
                 AddContactDB(Contact);
+                //Console.WriteLine($"!!!!Date sent from Form: {Contact.BirthDay} !!!!");
+                //OUTPUT: 01.01.0001, czyli od razu dostaje złą datę
+                //Console.WriteLine($"!!!!Date sent from Form: {Contact.BirthDay2} !!!!");
             }
             else
             {
@@ -76,7 +87,7 @@ namespace Project.Pages
 
             var contact = await _context.Contacts.FindAsync(id);
 
-            if (contact is not null)
+            if (contact is not null)//Copy to AddContactDB
             {
                 Contact = contact;
                 _context.Contacts.Remove(Contact);
@@ -84,16 +95,6 @@ namespace Project.Pages
             }
 
             return RedirectToPage("Index");
-        }
-
-        //public async Task<IActionResult> OnPostEdit(int? id){}
-
-        public IActionResult OnPostTest2()
-        {
-            Console.WriteLine("!!!!!!!!!!!!!POST IACTIONRESULT!!!!!!!!!!!!!!!!!");
-            return RedirectToPage("Index");
-            //Najpierw wywołał się handler potem przeniusł na Index!
-            //Working! Custom OnPost which refreshes page!
         }
 
         private void AddContactDB(Contact newContact)
