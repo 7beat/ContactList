@@ -21,8 +21,10 @@ Aplikacja zakłada używanie bazy MySql w celu przechowywania informacji na tema
 * EntityFrameworkCore: DataBase migrations
 * Pomelo.EntityFrameworkCore.MySql: MySql migration support
 
+<!--
 ## SQL/ERD
 ![](Diagram.png)
+-->
  
 <!--[ # Rework Branch is available!
  - [x] Cleaned and Fixed code
